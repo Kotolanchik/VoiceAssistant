@@ -17,7 +17,6 @@ public class MessageViewHolder extends RecyclerView.ViewHolder{
         super(itemView);
         messageText = itemView.findViewById(R.id.messageTextView);
         messageDate = itemView.findViewById(R.id.messageDateView);
-
     }
 
     public void bind(Message message) {

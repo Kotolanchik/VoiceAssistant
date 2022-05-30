@@ -6,8 +6,8 @@
         <entry key="..\:/Android/VoiceAssistant/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
         <entry key="..\:/Android/VoiceAssistant/app/src/main/res/drawable/user_bubble.xml" value="0.1" />
         <entry key="..\:/Android/VoiceAssistant/app/src/main/res/layout/activity_main.xml" value="0.25" />
-        <entry key="..\:/Android/VoiceAssistant/app/src/main/res/layout/assistant_message.xml" value="0.33" />
-        <entry key="..\:/Android/VoiceAssistant/app/src/main/res/layout/user_message.xml" value="0.33" />
+        <entry key="..\:/Android/VoiceAssistant/app/src/main/res/layout/assistant_message.xml" value="0.25" />
+        <entry key="..\:/Android/VoiceAssistant/app/src/main/res/layout/user_message.xml" value="0.75" />
       </map>
     </option>
   </component>

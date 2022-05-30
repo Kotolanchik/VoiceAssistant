@@ -1,23 +1,28 @@
 package com.example.voiceassistant;
 
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.annotation.SuppressLint;
 import android.os.Build;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.io.IOException;
 import java.util.Locale;
+import java.util.function.Consumer;
 
 @RequiresApi(api = Build.VERSION_CODES.O)
 public class MainActivity extends AppCompatActivity {
     protected Button sendButton;
     protected EditText questionText;
-    protected TextView chatWindow;
+    protected RecyclerView chatMessageList;
+    protected MessageListAdapter messageListAdapter;
     protected AI ai = new AI();
     protected TextToSpeech textToSpeech;
 
@@ -28,12 +33,16 @@ public class MainActivity extends AppCompatActivity {
 
         sendButton = findViewById(R.id.sendButton);
         questionText = findViewById(R.id.questionField);
-        chatWindow = findViewById(R.id.chatWindow);
 
-        textToSpeech = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener(){
+        messageListAdapter = new MessageListAdapter();
+        chatMessageList = findViewById(R.id.chatMessageList);
+        chatMessageList.setLayoutManager(new LinearLayoutManager(this));
+        chatMessageList.setAdapter(messageListAdapter);
+
+        textToSpeech = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
             @Override
-            public void onInit(int i){
-                if (i!= TextToSpeech.ERROR) {
+            public void onInit(int i) {
+                if (i != TextToSpeech.ERROR) {
                     textToSpeech.setLanguage(new Locale("ru"));
                 }
             }
@@ -42,16 +51,28 @@ public class MainActivity extends AppCompatActivity {
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onSend();
+                try {
+                    onSend();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         });
     }
 
-    protected void onSend() {
+    @SuppressLint("NotifyDataSetChanged")
+    protected void onSend() throws IOException {
         String question = questionText.getText().toString();
-        String answer = ai.getAnswer(question.toLowerCase());
-        chatWindow.append(question + "\n");
-        chatWindow.append(answer + "\n");
-        textToSpeech.speak(answer, TextToSpeech.QUEUE_FLUSH,null, null );
+        ai.getAnswer(question.toLowerCase(), new Consumer<String>() {
+            @Override
+            public void accept(String answer) {
+                messageListAdapter.messageList.add(new Message(question, true));
+                messageListAdapter.messageList.add(new Message(answer, false));
+                messageListAdapter.notifyDataSetChanged();
+
+                chatMessageList.scrollToPosition(messageListAdapter.messageList.size() - 1);
+                textToSpeech.speak(answer, TextToSpeech.QUEUE_FLUSH, null, null);
+            }
+        });
     }
 }
