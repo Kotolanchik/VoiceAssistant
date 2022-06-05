@@ -30,5 +30,4 @@ public class ParsingHtmlService {
 
         return "Не нашел";
     }
-
 }

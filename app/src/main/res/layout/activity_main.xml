@@ -4,8 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#7085FA"
+    android:background="#FFD6FA"
     tools:context=".MainActivity">
+
+    a
 
     <LinearLayout
         android:id="@+id/linearLayout3"
@@ -22,26 +24,43 @@
         <EditText
             android:id="@+id/questionField"
             style="@android:style/Widget.AutoCompleteTextView"
-            android:layout_width="223dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:autoText="true"
-            android:background="#9CA9F4"
+            android:background="@drawable/rounded_innertext"
             android:ems="10"
             android:hint="Задайте вопрос"
             android:inputType="textPersonName"
             android:minHeight="48dp"
             android:paddingLeft="10dp"
-            android:textColor="#FFFFFF"
-            android:textColorHint="#455A64" />
+            android:shadowColor="@color/teal_200"
+            android:shadowDx="-2"
+            android:shadowDy="-2"
+            android:shadowRadius="1"
+            android:textColor="#8E4AD1"
+            android:textColorHint="#6F2FAE"
+            android:textSize="18sp" />
 
         <Button
             android:id="@+id/sendButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:autoText="false"
+            android:background="@drawable/rounded_innertext"
             android:text="Отправить"
+            android:textIsSelectable="false"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:shadowColor="@color/teal_200"
+            android:shadowDx="-2"
+            android:shadowDy="-2"
+            android:shadowRadius="1"
+
+            app:boxBackgroundMode="none"
             />
+
 
     </LinearLayout>
 
@@ -53,7 +72,10 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:background="#9CA9F4"
+        android:background="@drawable/rounded_recyclerview"
+        android:paddingLeft="10dp"
+
+        android:paddingRight="10dp"
         android:textAlignment="gravity"
         android:verticalScrollbarPosition="right"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout3"

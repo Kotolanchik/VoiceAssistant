@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:shape="rectangle">
 
-    <solid android:color="#0cedaa"></solid>
+    <solid android:color="#FCA0BA"></solid>
     <corners android:radius="20dp"></corners>
 
 </shape>

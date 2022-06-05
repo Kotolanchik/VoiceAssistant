@@ -1,17 +1,18 @@
-package com.example.voiceassistant;
+package com.example.voiceassistant.AI;
 
-import android.annotation.SuppressLint;
-import android.os.AsyncTask;
 import android.os.Build;
 
 import androidx.annotation.RequiresApi;
+
+import com.example.voiceassistant.ParsingHtmlService;
+import com.example.voiceassistant.api.forecast.ForecastToString;
+import com.example.voiceassistant.api.number.NumberToString;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
-import java.util.concurrent.Callable;
 import java.util.function.Consumer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -72,7 +73,7 @@ public class AI {
             question_answer.put("какой сегодня день", getNowDayOfTheMonth());
             question_answer.put("который час", getNowHour());
             question_answer.put("какой день недели", getNowDayOfTheWeek());
-            question_answer.put("сколько дней осталось до лета", getNumberOfDaysUntilSummer());
+            question_answer.put("сколько дней осталось до конца лета", getNumberOfDaysUntilSummer());
         }
 
         if (localisation.equals("en")) {
@@ -101,7 +102,9 @@ public class AI {
     }
 
     private String getNumberOfDaysUntilSummer() {
-        Calendar summer = new GregorianCalendar(2022, 5, 1, 0, 0, 0);
-        return "До лета осталось " + (summer.getTimeInMillis() - calendar.getTimeInMillis()) / (1000 * 60 * 60 * 24) + " дней";
+        Calendar summer = new GregorianCalendar(2022, 7, 31, 0, 0, 0);
+        return "До конца лета осталось " + (summer.getTimeInMillis() - calendar.getTimeInMillis()) / (1000 * 60 * 60 * 24) + " дней";
     }
+
+
 }

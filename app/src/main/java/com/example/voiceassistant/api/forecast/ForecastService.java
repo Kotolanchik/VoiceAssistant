@@ -1,4 +1,4 @@
-package com.example.voiceassistant;
+package com.example.voiceassistant.api.forecast;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;

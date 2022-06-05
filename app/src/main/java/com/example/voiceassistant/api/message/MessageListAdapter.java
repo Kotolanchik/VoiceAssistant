@@ -1,4 +1,4 @@
-package com.example.voiceassistant;
+package com.example.voiceassistant.api.message;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -6,6 +6,8 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.voiceassistant.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,9 +17,9 @@ public class MessageListAdapter extends RecyclerView.Adapter {
     private static final int ASSISTANT_TYPE = 0;
     private static final int USER_TYPE = 1;
 
-
     /**
      * Вовзращает сообщение пользователя или ассистента.     *
+     *
      * @param parent   внутри этого элемента будет отображаться RecyclerView.
      * @param viewType тип представления(элементы списка).
      */
@@ -46,6 +48,7 @@ public class MessageListAdapter extends RecyclerView.Adapter {
 
     /**
      * Вызывается, когда появляется новое сообщение.     *
+     *
      * @param holder   номер сообщения.
      * @param position номер сообщения.
      */
@@ -69,8 +72,7 @@ public class MessageListAdapter extends RecyclerView.Adapter {
         Message message = messageList.get(index);
         if (message.isSend) {
             return USER_TYPE;
-        }
-        else {
+        } else {
             return ASSISTANT_TYPE;
         }
     }

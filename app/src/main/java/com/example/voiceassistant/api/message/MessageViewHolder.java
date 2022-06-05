@@ -1,10 +1,12 @@
-package com.example.voiceassistant;
+package com.example.voiceassistant.api.message;
 
 import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.voiceassistant.R;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -21,7 +23,7 @@ public class MessageViewHolder extends RecyclerView.ViewHolder{
 
     public void bind(Message message) {
         messageText.setText(message.text);
-        DateFormat fmt = new SimpleDateFormat("h:mm");
+        DateFormat fmt = new SimpleDateFormat("HH:mm");
         messageDate.setText(fmt.format(message.date));
     }
 
