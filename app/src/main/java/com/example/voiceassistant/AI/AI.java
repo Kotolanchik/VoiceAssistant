@@ -4,9 +4,9 @@ import android.os.Build;
 
 import androidx.annotation.RequiresApi;
 
+import com.example.voiceassistant.MainActivity;
 import com.example.voiceassistant.ParsingHtmlService;
 import com.example.voiceassistant.api.forecast.ForecastToString;
-import com.example.voiceassistant.api.number.NumberToString;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -25,6 +25,24 @@ public class AI {
     private final Map<String, String> question_answer;
     private final Calendar calendar;
     private final String localisation;
+    private String latitude;
+    private String longitude;
+
+    public String getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
+    }
+
+    public String getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
+    }
 
     public AI() {
         localisation = Locale.getDefault().getLanguage();
@@ -55,8 +73,15 @@ public class AI {
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(callback::accept);
+        } else if (question.contains("где я")) {
+            if (longitude != null && latitude != null) {
+                callback.accept("Широта: " + getLatitude() + "\nДолгота: " + getLongitude());
+            } else {
+                callback.accept("Я не смог определить Ваше местоположение");
+            }
         } else {
             callback.accept("Я ещё не придумал, что ответить");
+
         }
     }
 
@@ -105,6 +130,4 @@ public class AI {
         Calendar summer = new GregorianCalendar(2022, 7, 31, 0, 0, 0);
         return "До конца лета осталось " + (summer.getTimeInMillis() - calendar.getTimeInMillis()) / (1000 * 60 * 60 * 24) + " дней";
     }
-
-
 }
